@@ -14,10 +14,20 @@ public class Main {
     }
     
     public static String renderTemplate(String name, int age) {
-        
-        String template = "<html><body><h1>Hello, " + name + "!</h1><p>Your age is " + age + ".</p></body></html>";
+        String escapedName = escapeHtml(name);
+        String template = "<html><body><h1>Hello, " + escapedName + "!</h1><p>Your age is " + age + ".</p></body></html>";
         
         return template;
+    }
+    
+    private static String escapeHtml(String input) {
+        String escapedInput = input.replace("&", "&amp;")
+                                   .replace("<", "&lt;")
+                                   .replace(">", "&gt;")
+                                   .replace("\"", "&quot;")
+                                   .replace("'", "&#39;");
+        
+        return escapedInput;
     }
 }
 
